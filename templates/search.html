@@ -1,0 +1,93 @@
+{%  extends "bootstrap/base.html" %}
+
+
+{% block head %}
+{{super()}}
+<link rel="shortcut icon" href="{{url_for('static',filename='images/icon.png')}}" type="image/x-icon">
+<link rel="icon" href="{{url_for('static',filename='images/icon.png')}}" type="image/x-icon">
+
+{% endblock %}
+{% block title %}
+Find your Book
+{% endblock %}
+
+{% block navbar%}
+<header>
+    <div class="navbar navbar-inverse" role=navigation" id="navbarheader">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">FindBooks</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block content %}
+
+<div class="text-center">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Find some Books</h1>
+            <label for="sel1">Select List</label>
+            <select class="form-control" id="sel1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+           </select>
+           <input id="search_book" type="submit" class="btn btb-info" value="Search by ID">
+           <input id="search_books" type="submit" class="btn btb-info" value="Search All Books">
+           
+    </main>
+    </div>
+</div>
+{% block footer %}
+<footer class="footer" >
+   <div class="footer navbar-fixed-bottom text-center">
+        <p class="text-muted">&copy; 2018 prlab,CSC is Good</p>
+    </div>
+</footer>
+{% endblock footer %}
+{% endblock content %}
+
+
+
+
+{% block scripts %}
+{{super()}}
+<script>
+    $('#search_book').click(function(event){
+        $.ajax({
+            url: "http://140.118.110.164:8877/api/books/" + $(sel1).val(),
+            method: "GET",
+            contentType: "application/x-www-form-urlencoded",
+            data:{},
+            success: function(data){
+                console.log(data);
+            },
+            error: function(err, status, errorThrown){
+                console.log("Data: " + err + "\nStatus: " + status + "\nError: " + errorThrown);
+            }
+        }); 
+    });
+
+    $('#search_books').click(function(event){
+        $.ajax({
+            url: "http://140.118.110.164:8877/api/books/",
+            method: "GET",
+            contentType: "application/x-www-form-urlencoded",
+            data:{},
+            success: function(data){
+                console.log(data);
+            },
+            error: function(err, status, errorThrown){
+                console.log("Data: " + err + "\nStatus: " + status + "\nError: " + errorThrown);
+            }
+        });
+    
+    });
+</script>
+{% endblock %}
+

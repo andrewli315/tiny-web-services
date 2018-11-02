@@ -1,0 +1,6 @@
+./__pycache__
+./templates/index.html
+./templates/search_xss.html
+./app_xss.py
+
+
